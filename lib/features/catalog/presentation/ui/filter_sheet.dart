@@ -44,7 +44,10 @@ class _FilterSheetState extends State<FilterSheet> {
     if (_ceiling <= 0) _ceiling = 1000;
 
     _minPrice = (query.minPrice ?? 102).clamp(0.0, _ceiling);
-    _maxPrice = (query.maxPrice ?? math.min(327.0, _ceiling)).clamp(0.0, _ceiling);
+    _maxPrice = (query.maxPrice ?? math.min(327.0, _ceiling)).clamp(
+      0.0,
+      _ceiling,
+    );
     if (_minPrice > _maxPrice) _minPrice = 0;
 
     _propertyTypes = query.propertyTypes.isNotEmpty
@@ -54,10 +57,14 @@ class _FilterSheetState extends State<FilterSheet> {
     _bedrooms = query.bedrooms ?? 2;
     _bathrooms = query.bathrooms ?? 1;
 
-    _minBuildingSize = (query.minBuildingSize ?? 1370)
-        .clamp(_defaultMinSize, _defaultMaxSize);
-    _maxBuildingSize = (query.maxBuildingSize ?? 2720)
-        .clamp(_defaultMinSize, _defaultMaxSize);
+    _minBuildingSize = (query.minBuildingSize ?? 1370).clamp(
+      _defaultMinSize,
+      _defaultMaxSize,
+    );
+    _maxBuildingSize = (query.maxBuildingSize ?? 2720).clamp(
+      _defaultMinSize,
+      _defaultMaxSize,
+    );
     if (_minBuildingSize > _maxBuildingSize) {
       _minBuildingSize = _defaultMinSize;
       _maxBuildingSize = _defaultMaxSize;
@@ -92,8 +99,12 @@ class _FilterSheetState extends State<FilterSheet> {
         maxPrice: _maxPrice < _ceiling ? _maxPrice : null,
         bedrooms: _bedrooms > 0 ? _bedrooms : null,
         bathrooms: _bathrooms > 0 ? _bathrooms : null,
-        minBuildingSize: _minBuildingSize > _defaultMinSize ? _minBuildingSize : null,
-        maxBuildingSize: _maxBuildingSize < _defaultMaxSize ? _maxBuildingSize : null,
+        minBuildingSize: _minBuildingSize > _defaultMinSize
+            ? _minBuildingSize
+            : null,
+        maxBuildingSize: _maxBuildingSize < _defaultMaxSize
+            ? _maxBuildingSize
+            : null,
         sort: _sort,
       ),
     );
@@ -629,10 +640,7 @@ class _StepperRow extends StatelessWidget {
                   ),
                 ),
               ),
-              _stepperButton(
-                icon: Icons.add,
-                onPressed: onIncrement,
-              ),
+              _stepperButton(icon: Icons.add, onPressed: onIncrement),
             ],
           ),
         ],

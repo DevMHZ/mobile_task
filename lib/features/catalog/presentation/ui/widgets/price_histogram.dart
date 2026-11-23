@@ -44,7 +44,8 @@ class PriceHistogram extends StatelessWidget {
 
                   final binStart = (i / binCount) * maxVal;
                   final binEnd = ((i + 1) / binCount) * maxVal;
-                  final isInRange = (selectedMin == null || binEnd >= selectedMin!) &&
+                  final isInRange =
+                      (selectedMin == null || binEnd >= selectedMin!) &&
                       (selectedMax == null || binStart <= selectedMax!);
 
                   return Padding(

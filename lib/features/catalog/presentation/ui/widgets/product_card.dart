@@ -129,8 +129,9 @@ class ProductCard extends StatelessWidget {
             const SizedBox(height: AppSpace.md),
             SizedBox(
               height:
-                  MediaQuery.textScalerOf(context)
-                      .scale(DesignMetrics.cardTitleSize) *
+                  MediaQuery.textScalerOf(
+                    context,
+                  ).scale(DesignMetrics.cardTitleSize) *
                   DesignMetrics.cardLineHeight *
                   2,
               child: Text(

@@ -74,13 +74,7 @@ final class PreferencesCubit extends Cubit<PreferencesState> {
     required Set<int> favorites,
   }) async {
     final previous = state;
-    emit(
-      PreferencesState(
-        locale: locale,
-        favorites: favorites,
-        saving: true,
-      ),
-    );
+    emit(PreferencesState(locale: locale, favorites: favorites, saving: true));
     try {
       // Store only real server IDs; session creations disappear on restart.
       if (locale != previous.locale) {

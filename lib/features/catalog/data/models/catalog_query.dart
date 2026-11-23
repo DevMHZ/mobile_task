@@ -53,10 +53,12 @@ final class CatalogQuery {
     maxPrice: clearMaxPrice ? null : (maxPrice ?? this.maxPrice),
     bedrooms: clearBedrooms ? null : (bedrooms ?? this.bedrooms),
     bathrooms: clearBathrooms ? null : (bathrooms ?? this.bathrooms),
-    minBuildingSize:
-        clearMinBuildingSize ? null : (minBuildingSize ?? this.minBuildingSize),
-    maxBuildingSize:
-        clearMaxBuildingSize ? null : (maxBuildingSize ?? this.maxBuildingSize),
+    minBuildingSize: clearMinBuildingSize
+        ? null
+        : (minBuildingSize ?? this.minBuildingSize),
+    maxBuildingSize: clearMaxBuildingSize
+        ? null
+        : (maxBuildingSize ?? this.maxBuildingSize),
     sort: sort ?? this.sort,
   );
 
@@ -70,10 +72,8 @@ final class CatalogQuery {
                   propertyTypes.contains(p.propertyType)) &&
               (bedrooms == null || p.bedrooms >= bedrooms!) &&
               (bathrooms == null || p.bathrooms >= bathrooms!) &&
-              (minBuildingSize == null ||
-                  p.buildingSize >= minBuildingSize!) &&
-              (maxBuildingSize == null ||
-                  p.buildingSize <= maxBuildingSize!) &&
+              (minBuildingSize == null || p.buildingSize >= minBuildingSize!) &&
+              (maxBuildingSize == null || p.buildingSize <= maxBuildingSize!) &&
               (minPrice == null || p.price >= minPrice!) &&
               (maxPrice == null || p.price <= maxPrice!) &&
               (needle.isEmpty ||

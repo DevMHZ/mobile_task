@@ -31,7 +31,8 @@ class _AppShimmerState extends State<AppShimmer>
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: widget.duration);
-    final isTesting = !kIsWeb && io.Platform.environment.containsKey('FLUTTER_TEST');
+    final isTesting =
+        !kIsWeb && io.Platform.environment.containsKey('FLUTTER_TEST');
     if (!isTesting) {
       _controller.repeat();
     } else {
@@ -57,12 +58,9 @@ class _AppShimmerState extends State<AppShimmer>
           blendMode: BlendMode.srcATop,
           shaderCallback: (bounds) {
             final progress = _controller.value;
-            final isRtl =
-                Directionality.of(context) == TextDirection.rtl;
+            final isRtl = Directionality.of(context) == TextDirection.rtl;
             return LinearGradient(
-              begin: isRtl
-                  ? Alignment.centerRight
-                  : Alignment.centerLeft,
+              begin: isRtl ? Alignment.centerRight : Alignment.centerLeft,
               end: isRtl ? Alignment.centerLeft : Alignment.centerRight,
               colors: [base, highlight, base],
               stops: const [0.0, 0.5, 1.0],

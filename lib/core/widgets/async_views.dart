@@ -240,7 +240,8 @@ class CatalogSkeleton extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: AppSpace.page),
                 child: LayoutBuilder(
                   builder: (context, constraints) {
-                    final columns = constraints.maxWidth < AppSpace.gridBreakpoint
+                    final columns =
+                        constraints.maxWidth < AppSpace.gridBreakpoint
                         ? 2
                         : (constraints.maxWidth / 180).floor().clamp(2, 4);
                     const spacing = AppSpace.lg;
@@ -286,9 +287,7 @@ class ProductDetailsSkeleton extends StatelessWidget {
               children: [
                 const AspectRatio(
                   aspectRatio: DesignMetrics.detailImageRatio,
-                  child: ShimmerBox(
-                    borderRadius: BorderRadius.zero,
-                  ),
+                  child: ShimmerBox(borderRadius: BorderRadius.zero),
                 ),
                 PositionedDirectional(
                   top: topPadding + AppSpace.sm,
@@ -350,13 +349,17 @@ class ProductDetailsSkeleton extends StatelessWidget {
                       ShimmerBox(
                         width: 80,
                         height: 26,
-                        borderRadius: BorderRadius.circular(AppSpace.controlRadius),
+                        borderRadius: BorderRadius.circular(
+                          AppSpace.controlRadius,
+                        ),
                       ),
                       const SizedBox(width: AppSpace.md),
                       ShimmerBox(
                         width: 50,
                         height: 26,
-                        borderRadius: BorderRadius.circular(AppSpace.controlRadius),
+                        borderRadius: BorderRadius.circular(
+                          AppSpace.controlRadius,
+                        ),
                       ),
                     ],
                   ),
@@ -374,7 +377,9 @@ class ProductDetailsSkeleton extends StatelessWidget {
                           padding: const EdgeInsets.all(AppSpace.md),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(AppSpace.controlRadius),
+                            borderRadius: BorderRadius.circular(
+                              AppSpace.controlRadius,
+                            ),
                             boxShadow: const [DesignMetrics.cardShadow],
                           ),
                           child: const Column(
@@ -445,7 +450,9 @@ class ProductListSkeleton extends StatelessWidget {
                   ShimmerBox(
                     width: 56,
                     height: 56,
-                    borderRadius: BorderRadius.all(Radius.circular(AppSpace.controlRadius)),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(AppSpace.controlRadius),
+                    ),
                   ),
                   SizedBox(width: AppSpace.md),
                   Expanded(
@@ -492,10 +499,8 @@ class ProductGridSkeleton extends StatelessWidget {
               runSpacing: spacing,
               children: List.generate(
                 count,
-                (_) => SizedBox(
-                  width: width,
-                  child: const ProductCardSkeleton(),
-                ),
+                (_) =>
+                    SizedBox(width: width, child: const ProductCardSkeleton()),
               ),
             );
           },

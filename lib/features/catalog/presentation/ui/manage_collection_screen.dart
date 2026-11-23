@@ -31,9 +31,7 @@ class ManageCollectionScreen extends StatelessWidget {
     body: BlocBuilder<CatalogCubit, CatalogState>(
       builder: (context, state) {
         if (state.phase == LoadPhase.loading) {
-          return const SingleChildScrollView(
-            child: ProductListSkeleton(),
-          );
+          return const SingleChildScrollView(child: ProductListSkeleton());
         }
         if (state.phase == LoadPhase.error) {
           return FailureView(

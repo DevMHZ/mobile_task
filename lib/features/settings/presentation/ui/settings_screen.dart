@@ -17,129 +17,131 @@ class SettingsScreen extends StatelessWidget {
   final VoidCallback onExplore;
   final ScrollController? scrollController;
   @override
-  Widget build(
-    BuildContext context,
-  ) => BlocBuilder<PreferencesCubit, PreferencesState>(
-    builder: (context, state) {
-      final l = context.l10n;
-      return ListView(
-        controller: scrollController,
-        padding: const EdgeInsets.all(AppSpace.page),
-        children: [
-          Text(l.settings, style: Theme.of(context).textTheme.headlineSmall),
-          const SizedBox(height: AppSpace.xxl),
-          const Center(
-            child: CircleAvatar(
-              radius: DesignMetrics.profileAvatarSize / 2,
-              backgroundColor: AppColors.paleBlue,
-              child: Icon(
-                Icons.person_outline_rounded,
-                size: DesignMetrics.avatarSize,
-                color: AppColors.blue,
+  Widget build(BuildContext context) =>
+      BlocBuilder<PreferencesCubit, PreferencesState>(
+        builder: (context, state) {
+          final l = context.l10n;
+          return ListView(
+            controller: scrollController,
+            padding: const EdgeInsets.all(AppSpace.page),
+            children: [
+              Text(
+                l.settings,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
-            ),
-          ),
-          const SizedBox(height: AppSpace.lg),
-          Center(
-            child: Text(
-              l.appTitle,
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-          ),
-          const SizedBox(height: AppSpace.xl),
-          const Divider(),
-          if (state.failure != null)
-            InlineFailure(
-              failure: state.failure!,
-              retry: () => context.read<PreferencesCubit>().restore(),
-            ),
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Icons.favorite_border_rounded),
-            title: Text(l.saved),
-            trailing: const RotatedBox(
-              quarterTurns: 2,
-              child: BackButtonIcon(),
-            ),
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => Scaffold(
-                  appBar: AppBar(title: Text(l.saved)),
-                  body: FavoritesScreen(
-                    explore: () {
-                      Navigator.of(context).pop();
-                      onExplore();
-                    },
+              const SizedBox(height: AppSpace.xxl),
+              const Center(
+                child: CircleAvatar(
+                  radius: DesignMetrics.profileAvatarSize / 2,
+                  backgroundColor: AppColors.paleBlue,
+                  child: Icon(
+                    Icons.person_outline_rounded,
+                    size: DesignMetrics.avatarSize,
+                    color: AppColors.blue,
                   ),
                 ),
               ),
-            ),
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Icons.grid_view_outlined),
-            title: Text(l.manage),
-            trailing: const RotatedBox(
-              quarterTurns: 2,
-              child: BackButtonIcon(),
-            ),
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => const ManageCollectionScreen(),
+              const SizedBox(height: AppSpace.lg),
+              Center(
+                child: Text(
+                  l.appTitle,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ),
-            ),
-          ),
-          const Divider(),
-          const SizedBox(height: AppSpace.xl),
-          LanguageSelectorCard(
-            currentLocale: state.locale,
-            disabled: state.saving,
-            onSelect: (value) =>
-                context.read<PreferencesCubit>().selectLocale(value),
-          ),
-          const SizedBox(height: AppSpace.xxl),
-          const Divider(),
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Icons.info_outline_rounded),
-            title: Text(l.aboutApp),
-            trailing: const RotatedBox(
-              quarterTurns: 2,
-              child: BackButtonIcon(),
-            ),
-            onTap: () => showDialog<void>(
-              context: context,
-              builder: (_) => AlertDialog(
-                title: Text(l.demoTitle),
-                content: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(l.demoBody),
-                      const SizedBox(height: AppSpace.lg),
-                      Text(
-                        l.simulationTitle,
-                        style: Theme.of(context).textTheme.titleMedium,
+              const SizedBox(height: AppSpace.xl),
+              const Divider(),
+              if (state.failure != null)
+                InlineFailure(
+                  failure: state.failure!,
+                  retry: () => context.read<PreferencesCubit>().restore(),
+                ),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.favorite_border_rounded),
+                title: Text(l.saved),
+                trailing: const RotatedBox(
+                  quarterTurns: 2,
+                  child: BackButtonIcon(),
+                ),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => Scaffold(
+                      appBar: AppBar(title: Text(l.saved)),
+                      body: FavoritesScreen(
+                        explore: () {
+                          Navigator.of(context).pop();
+                          onExplore();
+                        },
                       ),
-                      Text(l.simulationBody),
+                    ),
+                  ),
+                ),
+              ),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.grid_view_outlined),
+                title: Text(l.manage),
+                trailing: const RotatedBox(
+                  quarterTurns: 2,
+                  child: BackButtonIcon(),
+                ),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ManageCollectionScreen(),
+                  ),
+                ),
+              ),
+              const Divider(),
+              const SizedBox(height: AppSpace.xl),
+              LanguageSelectorCard(
+                currentLocale: state.locale,
+                disabled: state.saving,
+                onSelect: (value) =>
+                    context.read<PreferencesCubit>().selectLocale(value),
+              ),
+              const SizedBox(height: AppSpace.xxl),
+              const Divider(),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.info_outline_rounded),
+                title: Text(l.aboutApp),
+                trailing: const RotatedBox(
+                  quarterTurns: 2,
+                  child: BackButtonIcon(),
+                ),
+                onTap: () => showDialog<void>(
+                  context: context,
+                  builder: (_) => AlertDialog(
+                    title: Text(l.demoTitle),
+                    content: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(l.demoBody),
+                          const SizedBox(height: AppSpace.lg),
+                          Text(
+                            l.simulationTitle,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          Text(l.simulationBody),
+                        ],
+                      ),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.of(context, rootNavigator: true).pop(),
+                        child: Text(l.back),
+                      ),
                     ],
                   ),
                 ),
-                actions: [
-                  TextButton(
-                    onPressed: () =>
-                        Navigator.of(context, rootNavigator: true).pop(),
-                    child: Text(l.back),
-                  ),
-                ],
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       );
-    },
-  );
 }
 
 /// A premium, interactive language selection card with native typography and visual feedback.
@@ -381,4 +383,3 @@ class _LanguageOptionCard extends StatelessWidget {
     );
   }
 }
-

@@ -77,8 +77,9 @@ class _CatalogScreenState extends State<CatalogScreen> {
   Widget build(BuildContext context) => BlocBuilder<CatalogCubit, CatalogState>(
     builder: (context, state) {
       final results = widget.explore;
-      final homeMatches = CatalogQuery(category: _homeCategory)
-          .apply(state.products);
+      final homeMatches = CatalogQuery(
+        category: _homeCategory,
+      ).apply(state.products);
       final featured = const CatalogQuery()
           .apply(state.products)
           .take(DesignMetrics.featuredCount)
@@ -135,9 +136,9 @@ class _CatalogScreenState extends State<CatalogScreen> {
                                 ),
                                 Text(
                                   context.l10n.appTitle,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium,
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.titleMedium,
                                 ),
                               ],
                             ),
@@ -478,4 +479,3 @@ class _QuickLanguageToggle extends StatelessWidget {
     );
   }
 }
-

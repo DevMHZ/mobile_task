@@ -56,59 +56,68 @@ void main() {
     expect(const CatalogQuery(text: 'zzzz-no-product').apply(items), isEmpty);
   });
 
-  test('price input accepts Arabic digits and rejects invalid ranges and exponents', () {
-    expect(parsePrice('٢٥٫٥٠'), 25.5);
-    expect(parsePrice('25.50'), 25.5);
-    expect(parsePrice('100000001'), 100000001);
-    for (final invalid in ['-1', 'NaN', '1e9', '1.999', '', 'not a price']) {
-      expect(parsePrice(invalid), isNull, reason: invalid);
-    }
-  });
+  test(
+    'price input accepts Arabic digits and rejects invalid ranges and exponents',
+    () {
+      expect(parsePrice('٢٥٫٥٠'), 25.5);
+      expect(parsePrice('25.50'), 25.5);
+      expect(parsePrice('100000001'), 100000001);
+      for (final invalid in ['-1', 'NaN', '1e9', '1.999', '', 'not a price']) {
+        expect(parsePrice(invalid), isNull, reason: invalid);
+      }
+    },
+  );
 
-  test('repository deduplicates concurrent loads and preserves mutation overlay on refresh', () async {
-    final adapter = RecordingAdapter();
-    final dio = Dio()..httpClientAdapter = adapter;
-    final repo = RemoteCatalogRepository(CatalogApiService(dio));
-    await Future.wait([repo.products(), repo.products()]);
-    expect(adapter.calls.where((c) => c.path == '/products').length, 1);
-    await repo.products();
-    expect(adapter.calls.length, 1);
-    final draft = ProductDraft(
-      title: 'Assessment fixture',
-      description: 'Description',
-      category: 'furniture',
-      price: 25,
-      imageUrl: 'https://example.com/image.webp',
-    );
-    final first = await repo.save(draft);
-    final second = await repo.save(draft);
-    expect(first.id, isNegative);
-    expect(first.id, isNot(second.id));
-    final afterRefresh = await repo.products(refresh: true);
-    expect(afterRefresh.where((p) => p.id < 0).length, 2);
-    final calls = adapter.calls.length;
-    await repo.save(draft, id: first.id);
-    await repo.delete(first.id);
-    expect(
-      adapter.calls.length,
-      calls,
-      reason: 'Session resources have no server endpoint',
-    );
-    expect((await repo.products()).any((p) => p.id == first.id), isFalse);
-    dio.close();
-  });
+  test(
+    'repository deduplicates concurrent loads and preserves mutation overlay on refresh',
+    () async {
+      final adapter = RecordingAdapter();
+      final dio = Dio()..httpClientAdapter = adapter;
+      final repo = RemoteCatalogRepository(CatalogApiService(dio));
+      await Future.wait([repo.products(), repo.products()]);
+      expect(adapter.calls.where((c) => c.path == '/products').length, 1);
+      await repo.products();
+      expect(adapter.calls.length, 1);
+      final draft = ProductDraft(
+        title: 'Assessment fixture',
+        description: 'Description',
+        category: 'furniture',
+        price: 25,
+        imageUrl: 'https://example.com/image.webp',
+      );
+      final first = await repo.save(draft);
+      final second = await repo.save(draft);
+      expect(first.id, isNegative);
+      expect(first.id, isNot(second.id));
+      final afterRefresh = await repo.products(refresh: true);
+      expect(afterRefresh.where((p) => p.id < 0).length, 2);
+      final calls = adapter.calls.length;
+      await repo.save(draft, id: first.id);
+      await repo.delete(first.id);
+      expect(
+        adapter.calls.length,
+        calls,
+        reason: 'Session resources have no server endpoint',
+      );
+      expect((await repo.products()).any((p) => p.id == first.id), isFalse);
+      dio.close();
+    },
+  );
 
-  test('API rejects a truncated response instead of silently filtering a partial page', () async {
-    final adapter = RecordingAdapter()
-      ..respond = (_) => {
-        'products': [fixture('detail')],
-        'total': 194,
-        'skip': 0,
-      };
-    final dio = Dio()..httpClientAdapter = adapter;
-    expect(CatalogApiService(dio).products(), throwsFormatException);
-    dio.close();
-  });
+  test(
+    'API rejects a truncated response instead of silently filtering a partial page',
+    () async {
+      final adapter = RecordingAdapter()
+        ..respond = (_) => {
+          'products': [fixture('detail')],
+          'total': 194,
+          'skip': 0,
+        };
+      final dio = Dio()..httpClientAdapter = adapter;
+      expect(CatalogApiService(dio).products(), throwsFormatException);
+      dio.close();
+    },
+  );
 
   test(
     'load failure, retry and failed refresh keep meaningful states',
@@ -156,8 +165,9 @@ void main() {
         (DioExceptionType.cancel, FailureKind.cancelled),
       ]) {
         expect(
-          AppFailure.from(DioException(requestOptions: request, type: pair.$1))
-              .kind,
+          AppFailure.from(
+            DioException(requestOptions: request, type: pair.$1),
+          ).kind,
           pair.$2,
         );
       }

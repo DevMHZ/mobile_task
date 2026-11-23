@@ -14,11 +14,7 @@ import '../product_form_screen.dart';
 
 /// Premium action popup menu designed for real estate property views.
 class ProductActionsMenu extends StatelessWidget {
-  const ProductActionsMenu({
-    required this.product,
-    this.onEdit,
-    super.key,
-  });
+  const ProductActionsMenu({required this.product, this.onEdit, super.key});
 
   final Product product;
   final VoidCallback? onEdit;
@@ -181,9 +177,7 @@ class ProductActionsMenu extends StatelessWidget {
     // No public listing URL exists for DummyJSON sample data, so share
     // copies the item's real details instead of inventing a link.
     await Clipboard.setData(
-      ClipboardData(
-        text: '${product.title}\n${context.money(product.price)}',
-      ),
+      ClipboardData(text: '${product.title}\n${context.money(product.price)}'),
     );
     if (messenger.mounted) {
       AppFeedback.success(messenger, msg);
@@ -255,9 +249,7 @@ class _DeleteProductDialogState extends State<_DeleteProductDialog> {
       canPop: !_pending,
       child: Dialog(
         key: const ValueKey('delete_confirmation'),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         insetPadding: const EdgeInsets.all(AppSpace.xl),
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: AppSpace.dialogWidth),

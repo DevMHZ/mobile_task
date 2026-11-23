@@ -89,7 +89,9 @@ void main() {
       );
       await tester.pumpAndSettle();
       final first = catalog.state.visible.first;
-      await tester.ensureVisible(find.byKey(ValueKey('favorite_${first.id}')).first);
+      await tester.ensureVisible(
+        find.byKey(ValueKey('favorite_${first.id}')).first,
+      );
       await tester.tap(find.byKey(ValueKey('favorite_${first.id}')).first);
       await tester.pumpAndSettle();
       await tester.tap(find.text('Profile'));
@@ -115,7 +117,10 @@ void main() {
       await tester.pumpAndSettle();
       await tester.drag(find.byType(CustomScrollView), const Offset(0, 1500));
       await tester.pumpAndSettle();
-      await tester.enterText(find.byKey(const ValueKey('catalog_search')), 'zzz-no');
+      await tester.enterText(
+        find.byKey(const ValueKey('catalog_search')),
+        'zzz-no',
+      );
       await tester.pumpAndSettle(const Duration(milliseconds: 350));
       expect(find.text('لا توجد نتائج مطابقة'), findsOneWidget);
       await tester.tap(find.text('إزالة التصفية'));
