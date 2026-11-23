@@ -452,9 +452,11 @@ class _QuickLanguageToggle extends StatelessWidget {
             final next = isArabic ? 'en' : 'ar';
             context.read<PreferencesCubit>().selectLocale(next);
           },
-          tooltip: isArabic ? 'Switch to English' : 'التحويل إلى العربية',
+          tooltip: isArabic
+              ? context.l10n.switchToEnglish
+              : context.l10n.switchToArabic,
           padding: EdgeInsets.zero,
-          constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+          constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
           icon: Container(
             padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
             decoration: BoxDecoration(

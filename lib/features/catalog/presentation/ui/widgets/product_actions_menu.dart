@@ -178,8 +178,12 @@ class ProductActionsMenu extends StatelessWidget {
   Future<void> _share(BuildContext context) async {
     final messenger = ScaffoldMessenger.of(context);
     final msg = context.l10n.itemShared;
+    // No public listing URL exists for DummyJSON sample data, so share
+    // copies the item's real details instead of inventing a link.
     await Clipboard.setData(
-      ClipboardData(text: 'https://realestate.demo/property/${product.id}'),
+      ClipboardData(
+        text: '${product.title}\n${context.money(product.price)}',
+      ),
     );
     if (messenger.mounted) {
       AppFeedback.success(messenger, msg);

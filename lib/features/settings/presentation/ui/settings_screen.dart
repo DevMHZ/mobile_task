@@ -244,7 +244,7 @@ class LanguageSelectorCard extends StatelessWidget {
                 child: _LanguageOptionCard(
                   title: l.english,
                   code: 'en',
-                  subtitle: 'LTR Direction',
+                  subtitle: l.ltrDirection,
                   isSelected: !isArabic,
                   onTap: disabled || !isArabic ? null : () => onSelect('en'),
                 ),
@@ -254,7 +254,7 @@ class LanguageSelectorCard extends StatelessWidget {
                 child: _LanguageOptionCard(
                   title: l.arabic,
                   code: 'ar',
-                  subtitle: 'من اليمين (RTL)',
+                  subtitle: l.rtlDirection,
                   isSelected: isArabic,
                   onTap: disabled || isArabic ? null : () => onSelect('ar'),
                 ),

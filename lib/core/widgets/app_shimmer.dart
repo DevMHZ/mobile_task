@@ -57,9 +57,13 @@ class _AppShimmerState extends State<AppShimmer>
           blendMode: BlendMode.srcATop,
           shaderCallback: (bounds) {
             final progress = _controller.value;
+            final isRtl =
+                Directionality.of(context) == TextDirection.rtl;
             return LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+              begin: isRtl
+                  ? Alignment.centerRight
+                  : Alignment.centerLeft,
+              end: isRtl ? Alignment.centerLeft : Alignment.centerRight,
               colors: [base, highlight, base],
               stops: const [0.0, 0.5, 1.0],
               transform: _SlidingGradientTransform(
