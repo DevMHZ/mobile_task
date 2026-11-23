@@ -144,8 +144,8 @@ class _FilterSheetState extends State<FilterSheet> {
                     child: InkWell(
                       onTap: () => Navigator.pop(context),
                       child: SizedBox(
-                        width: 38,
-                        height: 38,
+                        width: 48,
+                        height: 48,
                         child: Icon(
                           isRtl
                               ? Icons.arrow_forward_rounded
@@ -432,6 +432,14 @@ class ModernRangeSliderWithLabels extends StatelessWidget {
 
         final isTooClose = (rightX - leftX).abs() < 60;
 
+        // Keep every label fully inside the track width. Without the upper
+        // clamp a label centred near an edge (common in RTL, where the
+        // minimum thumb sits at the right) is clipped by the sheet.
+        double labelLeft(double centre, double labelWidth) =>
+            (centre - labelWidth / 2)
+                .clamp(0.0, math.max(0.0, width - labelWidth))
+                .toDouble();
+
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -462,10 +470,12 @@ class ModernRangeSliderWithLabels extends StatelessWidget {
                 children: [
                   if (isTooClose)
                     Positioned(
-                      left: math.max(0.0, (leftX + rightX) / 2 - 55),
+                      left: labelLeft((leftX + rightX) / 2, 110),
                       width: 110,
                       child: Text(
-                        '${formatLabel(values.start)} - ${formatLabel(values.end)}',
+                        // Isolate the Latin range so its order stays
+                        // readable inside an RTL paragraph.
+                        '\u2066${formatLabel(values.start)} - ${formatLabel(values.end)}\u2069',
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: AppColors.blue,
@@ -476,7 +486,7 @@ class ModernRangeSliderWithLabels extends StatelessWidget {
                     )
                   else ...[
                     Positioned(
-                      left: math.max(0.0, leftX - 35),
+                      left: labelLeft(leftX, 70),
                       width: 70,
                       child: Text(
                         formatLabel(isRtl ? values.end : values.start),
@@ -489,7 +499,7 @@ class ModernRangeSliderWithLabels extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      left: math.max(0.0, rightX - 35),
+                      left: labelLeft(rightX, 70),
                       width: 70,
                       child: Text(
                         formatLabel(isRtl ? values.start : values.end),
@@ -639,8 +649,8 @@ class _StepperRow extends StatelessWidget {
       child: InkWell(
         onTap: onPressed,
         child: SizedBox(
-          width: 32,
-          height: 32,
+          width: 48,
+          height: 48,
           child: Icon(
             icon,
             size: 16,
