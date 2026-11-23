@@ -159,7 +159,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                       ),
                       const SizedBox(height: AppSpace.lg),
                       DropdownButtonFormField<String>(
-                        value: _category,
+                        initialValue: _category,
                         isExpanded: true,
                         decoration: InputDecoration(labelText: l.category),
                         items: [
@@ -259,8 +259,9 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
         valueListenable: controller,
         builder: (context, value, child) => Text(
           '${value.text.length}/$maximum',
-          style: Theme.of(context).textTheme.labelSmall
-              ?.copyWith(color: AppColors.muted),
+          style: Theme.of(
+            context,
+          ).textTheme.labelSmall?.copyWith(color: AppColors.muted),
         ),
       );
 
