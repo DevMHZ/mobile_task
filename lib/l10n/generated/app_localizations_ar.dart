@@ -365,5 +365,21 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shareItem => 'مشاركة العقار';
 
   @override
-  String get itemShared => 'تم نسخ الرابط إلى الحافظة';
+  String get itemShared => 'تم نسخ تفاصيل العنصر إلى الحافظة';
+
+  @override
+  String get simulatedPropertyNote =>
+      'سمات العقار محاكاة حتمية مشتقة من معرّف المنتج لأن DummyJSON لا يوفر حقولاً عقارية.';
+
+  @override
+  String get switchToEnglish => 'التبديل إلى الإنجليزية';
+
+  @override
+  String get switchToArabic => 'التبديل إلى العربية';
+
+  @override
+  String get ltrDirection => 'من اليسار (LTR)';
+
+  @override
+  String get rtlDirection => 'من اليمين (RTL)';
 }

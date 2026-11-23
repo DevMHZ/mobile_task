@@ -297,6 +297,47 @@ class _DetailsContentState extends State<_DetailsContent> {
                       ),
                       const SizedBox(height: AppSpace.xl),
                       Text(
+                        l.homeDetails,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      const SizedBox(height: AppSpace.md),
+                      Wrap(
+                        spacing: AppSpace.sm,
+                        runSpacing: AppSpace.sm,
+                        children: [
+                          _PropertyFact(
+                            icon: Icons.home_work_outlined,
+                            label: l.propertyType,
+                            value: context.propertyTypeLabel(p.propertyType),
+                          ),
+                          _PropertyFact(
+                            icon: Icons.bed_outlined,
+                            label: l.bedrooms,
+                            value: '${p.bedrooms}',
+                          ),
+                          _PropertyFact(
+                            icon: Icons.bathtub_outlined,
+                            label: l.bathrooms,
+                            value: '${p.bathrooms}',
+                          ),
+                          _PropertyFact(
+                            icon: Icons.straighten_outlined,
+                            label: l.buildingSize,
+                            value: '${p.buildingSize}',
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: AppSpace.sm),
+                      Text(
+                        l.simulatedPropertyNote,
+                        style: const TextStyle(
+                          color: AppColors.muted,
+                          fontSize: 12,
+                          height: 1.6,
+                        ),
+                      ),
+                      const SizedBox(height: AppSpace.xl),
+                      Text(
                         l.gallery,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
@@ -388,4 +429,49 @@ class _DetailsContentState extends State<_DetailsContent> {
       ],
     );
   }
+}
+
+/// One simulated property fact (type, bedrooms, bathrooms or area).
+/// Values come from `Product`'s documented ID-derived simulation.
+class _PropertyFact extends StatelessWidget {
+  const _PropertyFact({
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
+
+  final IconData icon;
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(
+      horizontal: AppSpace.md,
+      vertical: AppSpace.sm,
+    ),
+    decoration: BoxDecoration(
+      color: AppColors.paleBlue,
+      borderRadius: BorderRadius.circular(AppSpace.controlRadius),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 18, color: AppColors.blue),
+        const SizedBox(width: AppSpace.sm),
+        Text(
+          '$label: ',
+          style: const TextStyle(color: AppColors.muted, fontSize: 13),
+        ),
+        Text(
+          value,
+          style: const TextStyle(
+            color: AppColors.ink,
+            fontSize: 13,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ],
+    ),
+  );
 }

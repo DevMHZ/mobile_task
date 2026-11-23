@@ -129,5 +129,10 @@
   "duplexes": "دوبلكس",
   "studios": "استوديو",
   "shareItem": "مشاركة العقار",
-  "itemShared": "تم نسخ الرابط إلى الحافظة"
+  "itemShared": "تم نسخ تفاصيل العنصر إلى الحافظة",
+  "simulatedPropertyNote": "سمات العقار محاكاة حتمية مشتقة من معرّف المنتج لأن DummyJSON لا يوفر حقولاً عقارية.",
+  "switchToEnglish": "التبديل إلى الإنجليزية",
+  "switchToArabic": "التبديل إلى العربية",
+  "ltrDirection": "من اليسار (LTR)",
+  "rtlDirection": "من اليمين (RTL)"
 }

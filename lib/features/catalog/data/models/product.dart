@@ -42,6 +42,11 @@ final class Product {
   String get coverImage => images.isEmpty ? thumbnail : images.first;
   bool get isSessionOnly => id < 0;
 
+  // Simulated real-estate attributes. DummyJSON products have no
+  // bedrooms/bathrooms/area/property-type fields, so these values are
+  // derived deterministically from the product ID to exercise the Figma
+  // filter sheet and details layout. They are displayed in the UI with a
+  // disclosure note and documented in README; they are not API data.
   int get bedrooms => (id.abs() % 4) + 1;
   int get bathrooms => (id.abs() % 3) + 1;
   int get buildingSize => 800 + ((id.abs() * 190) % 2400);

@@ -773,8 +773,38 @@ abstract class AppLocalizations {
   /// No description provided for @itemShared.
   ///
   /// In en, this message translates to:
-  /// **'Link copied to clipboard'**
+  /// **'Item details copied to clipboard'**
   String get itemShared;
+
+  /// No description provided for @simulatedPropertyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Property attributes are simulated deterministically from the product ID because DummyJSON has no real-estate fields.'**
+  String get simulatedPropertyNote;
+
+  /// No description provided for @switchToEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to English'**
+  String get switchToEnglish;
+
+  /// No description provided for @switchToArabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to Arabic'**
+  String get switchToArabic;
+
+  /// No description provided for @ltrDirection.
+  ///
+  /// In en, this message translates to:
+  /// **'LTR direction'**
+  String get ltrDirection;
+
+  /// No description provided for @rtlDirection.
+  ///
+  /// In en, this message translates to:
+  /// **'Right-to-left (RTL)'**
+  String get rtlDirection;
 }
 
 class _AppLocalizationsDelegate

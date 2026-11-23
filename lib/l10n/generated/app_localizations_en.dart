@@ -365,5 +365,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shareItem => 'Share property';
 
   @override
-  String get itemShared => 'Link copied to clipboard';
+  String get itemShared => 'Item details copied to clipboard';
+
+  @override
+  String get simulatedPropertyNote =>
+      'Property attributes are simulated deterministically from the product ID because DummyJSON has no real-estate fields.';
+
+  @override
+  String get switchToEnglish => 'Switch to English';
+
+  @override
+  String get switchToArabic => 'Switch to Arabic';
+
+  @override
+  String get ltrDirection => 'LTR direction';
+
+  @override
+  String get rtlDirection => 'Right-to-left (RTL)';
 }

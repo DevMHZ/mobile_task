@@ -17,6 +17,19 @@ extension LocalizedContext on BuildContext {
     return '\u2066$formatted\u2069';
   }
 
+  /// Localised label for an internal property-type key (see
+  /// `Product.propertyType`). Keys stay in English for filtering; only
+  /// the displayed label is translated.
+  String propertyTypeLabel(String key) => switch (key) {
+    'Apartments' => l10n.apartments,
+    'Townhomes' => l10n.townhomes,
+    'Homes' => l10n.homes,
+    'Condos' => l10n.condos,
+    'Duplexes' => l10n.duplexes,
+    'Studios' => l10n.studios,
+    _ => key,
+  };
+
   String failureMessage(AppFailure failure) => switch (failure.kind) {
     FailureKind.offline => l10n.offlineError,
     FailureKind.timeout => l10n.timeoutError,

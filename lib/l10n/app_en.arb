@@ -129,5 +129,10 @@
   "duplexes": "Duplexes",
   "studios": "Studios",
   "shareItem": "Share property",
-  "itemShared": "Link copied to clipboard"
+  "itemShared": "Item details copied to clipboard",
+  "simulatedPropertyNote": "Property attributes are simulated deterministically from the product ID because DummyJSON has no real-estate fields.",
+  "switchToEnglish": "Switch to English",
+  "switchToArabic": "Switch to Arabic",
+  "ltrDirection": "LTR direction",
+  "rtlDirection": "Right-to-left (RTL)"
 }
