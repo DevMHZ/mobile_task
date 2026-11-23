@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Mobile Task - iPhone 17",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "BFFBA6CC-87C6-44D6-8864-3A1FF79CEA4D",
+      "flutterMode": "debug",
+      "toolArgs": ["--dart-define-from-file=env/dev.json"]
+    }
+  ]
+}
