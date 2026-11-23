@@ -115,7 +115,6 @@ class _FilterSheetState extends State<FilterSheet> {
   Widget build(BuildContext context) {
     final l = context.l10n;
     final catalog = context.read<CatalogCubit>();
-    final isRtl = Directionality.of(context) == TextDirection.rtl;
 
     return Container(
       decoration: const BoxDecoration(
@@ -157,12 +156,14 @@ class _FilterSheetState extends State<FilterSheet> {
                       child: SizedBox(
                         width: 48,
                         height: 48,
-                        child: Icon(
-                          isRtl
-                              ? Icons.arrow_forward_rounded
-                              : Icons.arrow_back_rounded,
+                        // arrow_back_rounded has matchTextDirection, so
+                        // it flips to point right in RTL automatically.
+                        // Choosing arrow_forward manually in RTL would
+                        // double-flip it back to the left.
+                        child: const Icon(
+                          Icons.arrow_back_rounded,
                           size: 18,
-                          color: const Color(0xFF1E293B),
+                          color: Color(0xFF1E293B),
                         ),
                       ),
                     ),
