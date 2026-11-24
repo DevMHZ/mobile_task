@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/localization/context_l10n.dart';
+import '../../../../core/localization/content_direction.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/app_network_image.dart';
 import '../../../../core/widgets/interactive_surface.dart';
@@ -237,6 +238,10 @@ class _DetailsContentState extends State<_DetailsContent> {
                     children: [
                       Text(
                         p.title,
+                        textDirection: contentDirection(
+                          p.title,
+                          Directionality.of(context),
+                        ),
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       const SizedBox(height: AppSpace.md),
@@ -292,6 +297,10 @@ class _DetailsContentState extends State<_DetailsContent> {
                       const SizedBox(height: AppSpace.md),
                       Text(
                         p.description,
+                        textDirection: contentDirection(
+                          p.description,
+                          Directionality.of(context),
+                        ),
                         style: const TextStyle(
                           color: AppColors.muted,
                           height: 1.8,

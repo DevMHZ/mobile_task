@@ -2,9 +2,9 @@ import 'package:mobile_task/features/settings/data/preferences_store.dart';
 
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:mobile_task/features/catalog/data/models/product.dart';
 import 'package:mobile_task/features/catalog/data/models/product_category.dart';
 import 'package:mobile_task/features/catalog/data/repo/catalog_repository.dart';
@@ -115,4 +115,18 @@ class RecordingAdapter implements HttpClientAdapter {
 
   @override
   void close({bool force = false}) {}
+}
+
+Future<void> loadAppFonts() async {
+  final english = FontLoader('Rubik')
+    ..addFont(rootBundle.load('assets/fonts/Rubik.ttf'));
+  final arabic = FontLoader('IBMPlexSansArabic');
+  for (final weight in ['Regular', 'Medium', 'SemiBold', 'Bold']) {
+    arabic.addFont(
+      rootBundle.load(
+        'assets/fonts/ibm_plex_sans_arabic/IBMPlexSansArabic-$weight.ttf',
+      ),
+    );
+  }
+  await Future.wait([english.load(), arabic.load()]);
 }

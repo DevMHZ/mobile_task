@@ -63,7 +63,7 @@
   "deleteItem": "حذف العنصر",
   "title": "الاسم",
   "description": "الوصف",
-  "imageUrl": "رابط الصورة (https://...)",
+  "imageUrl": "رابط الصورة (\u2066https://...\u2069)",
   "saveChanges": "حفظ التغييرات",
   "cancel": "إلغاء",
   "requiredField": "هذا الحقل مطلوب.",

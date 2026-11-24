@@ -1,6 +1,5 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
@@ -29,7 +28,12 @@ android {
         versionName = flutter.versionName
     }
 
-
+    buildTypes {
+        release {
+            // Installable assessment build. Store distribution needs a private release key.
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
 }
 
 kotlin {

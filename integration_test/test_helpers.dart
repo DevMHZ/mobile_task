@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+// Network image shimmers can animate while the interface is already usable.
+// Advance the route transition; callers wait for the specific resulting UI.
+Future<void> settle(WidgetTester tester) async {
+  await tester.pump();
+  await tester.pump(const Duration(milliseconds: 400));
+}
+
 Future<void> waitFor(WidgetTester tester, Finder finder) async {
   final clock = Stopwatch()..start();
   const timeout = Duration(seconds: 40);
@@ -8,16 +15,19 @@ Future<void> waitFor(WidgetTester tester, Finder finder) async {
     await tester.pump(const Duration(milliseconds: 100));
   }
   expect(finder, findsWidgets);
-  await tester.pumpAndSettle();
+  await settle(tester);
 }
 
 Future<void> reveal(WidgetTester tester, Finder finder) async {
   FocusManager.instance.primaryFocus?.unfocus();
-  await tester.pumpAndSettle();
+  await settle(tester);
   if (finder.evaluate().isEmpty) {
     final scrollable = find
         .descendant(
-          of: find.byType(ListView).last,
+          of: find
+              .byWidgetPredicate((w) => w is ListView || w is CustomScrollView)
+              .hitTestable()
+              .last,
           matching: find.byType(Scrollable),
         )
         .first;
@@ -30,5 +40,15 @@ Future<void> reveal(WidgetTester tester, Finder finder) async {
   } else {
     await Scrollable.ensureVisible(tester.element(finder), alignment: .5);
   }
-  await tester.pumpAndSettle();
+  await settle(tester);
+}
+
+Future<void> waitUntilGone(WidgetTester tester, Finder finder) async {
+  final clock = Stopwatch()..start();
+  const timeout = Duration(seconds: 40);
+  while (finder.evaluate().isNotEmpty && clock.elapsed < timeout) {
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+  expect(finder, findsNothing);
+  await settle(tester);
 }

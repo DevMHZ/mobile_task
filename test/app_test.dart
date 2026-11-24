@@ -4,20 +4,13 @@ import 'package:mobile_task/features/catalog/presentation/ui/widgets/product_car
 import 'package:mobile_task/features/settings/presentation/cubit/preferences_cubit.dart';
 import 'package:mobile_task/my_app.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  setUpAll(() async {
-    final fonts = FontLoader('Cairo');
-    for (final name in ['Regular', 'SemiBold', 'Bold']) {
-      fonts.addFont(rootBundle.load('assets/fonts/Cairo-$name.ttf'));
-    }
-    await fonts.load();
-  });
+  setUpAll(loadAppFonts);
 
   for (final width in [320.0, 390.0, 800.0]) {
     for (final language in ['en', 'ar']) {

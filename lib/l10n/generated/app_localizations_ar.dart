@@ -202,7 +202,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get description => 'الوصف';
 
   @override
-  String get imageUrl => 'رابط الصورة (https://...)';
+  String get imageUrl => 'رابط الصورة (⁦https://...⁩)';
 
   @override
   String get saveChanges => 'حفظ التغييرات';

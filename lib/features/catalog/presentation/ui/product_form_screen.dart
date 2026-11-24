@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/config/app_config.dart';
 import '../../../../core/localization/context_l10n.dart';
+import '../../../../core/localization/content_direction.dart';
 import '../../../../core/localization/price_input.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/async_views.dart';
@@ -130,6 +131,10 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                       TextFormField(
                         key: const ValueKey('item_title'),
                         controller: _title,
+                        textDirection: contentDirection(
+                          _title.text,
+                          Directionality.of(context),
+                        ),
                         enabled: !state.mutating,
                         maxLength: AppConfig.maxTitleLength,
                         decoration: InputDecoration(
@@ -143,6 +148,10 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                       TextFormField(
                         key: const ValueKey('item_description'),
                         controller: _description,
+                        textDirection: contentDirection(
+                          _description.text,
+                          Directionality.of(context),
+                        ),
                         enabled: !state.mutating,
                         minLines: AppSpace.descriptionMinLines,
                         maxLines: AppSpace.descriptionMaxLines,
@@ -176,6 +185,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                       TextFormField(
                         key: const ValueKey('item_price'),
                         controller: _price,
+                        textDirection: TextDirection.ltr,
                         enabled: !state.mutating,
                         keyboardType: const TextInputType.numberWithOptions(
                           decimal: true,
@@ -257,11 +267,15 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
   Widget _counter(TextEditingController controller, int maximum) =>
       ValueListenableBuilder(
         valueListenable: controller,
-        builder: (context, value, child) => Text(
-          '${value.text.length}/$maximum',
-          style: Theme.of(
-            context,
-          ).textTheme.labelSmall?.copyWith(color: AppColors.muted),
+        builder: (context, value, child) => Padding(
+          padding: const EdgeInsetsDirectional.only(start: AppSpace.md),
+          child: Text(
+            '${value.text.length}/$maximum',
+            textDirection: TextDirection.ltr,
+            style: Theme.of(
+              context,
+            ).textTheme.labelSmall?.copyWith(color: AppColors.muted),
+          ),
         ),
       );
 
